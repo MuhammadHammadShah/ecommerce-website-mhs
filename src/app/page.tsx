@@ -1,17 +1,28 @@
 import React from "react";
-import { client } from "../../sanity/lib/client";
+import { client } from "@/lib/sanityClient";
+import { Image as IImage } from "sanity";
 
 interface IProduct {
   title: string;
   description: string;
-  image: string[];
+  image: IImage;
+  _id: string;
+  price: number;
+  category: {
+    name: string;
+  };
 }
 
 export const getProductData = async () => {
   const res = await client.fetch(`
   *[_type=="product"]{
-    title,
-    description,
+    price,
+  _id,
+      title,
+      image,
+      category -> {
+        name
+      }
   }`);
   return res;
 };
