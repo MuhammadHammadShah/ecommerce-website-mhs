@@ -35,7 +35,7 @@ const Home = async () => {
   return (
     <div className="grid grid-cols-[repeat(3,auto)] justify-center gap-x-10">
       {data.map((item) => (
-        <div>
+        <div key={item._id}>
           <Image
             width={200}
             height={200}
@@ -45,7 +45,10 @@ const Home = async () => {
           />
           <h1>{item.title}</h1>
           <h3>${item.price}</h3>
-          <button className="border py-2 px-6 rounded bg-blue-600 text-white">
+          <button
+            onClick={() => handleAddtoCart}
+            className="border py-2 px-6 rounded bg-blue-600 text-white"
+          >
             Add to cart
           </button>
         </div>
